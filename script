@@ -1499,48 +1499,68 @@ do
     end)
 end
 do
-    local espb = ui.box.esp:AddTab("player esp")
-    local es = cheat.EspLibrary.settings.enemy
-    espb:AddDropdown('espfont', {Values = { 'UI', 'System', 'Plex', 'Monospace' },Default = 1,Multi = false,Text = 'esp font',Tooltip = 'select font',Callback = function(Value)
+local espb = ui.box.esp:AddTab("player esp")
+local es = cheat.EspLibrary.settings.enemy
+
+espb:AddDropdown('espfont', {
+    Values = {'UI', 'System', 'Plex', 'Monospace'},
+    Default = 1,
+    Multi = false,
+    Text = 'esp font',
+    Tooltip = 'select font',
+    Callback = function(Value)
         cheat.EspLibrary.main_settings.textFont = Drawing.Fonts[Value]
         cheat.EspLibrary.icaca()
-    end})
-    espb:AddSlider('espfontsize', { Text = 'esp font size', Default = 13, Min = 1, Max = 30, Rounding = 0, Compact = true }):OnChanged(function(State)
-        cheat.EspLibrary.main_settings.textSize = State
+    end
+})
+
+espb:AddSlider('espfontsize', {
+    Text = 'esp font size',
+    Default = 13,
+    Min = 1,
+    Max = 30,
+    Rounding = 0,
+    Compact = true
+}):OnChanged(function(State)
+    cheat.EspLibrary.main_settings.textSize = State
+    cheat.EspLibrary.icaca()
+end)
+
+espb:AddToggle('espsimplecalc', {
+    Text = 'simpler corner calc (fps)',
+    Default = false,
+    Callback = function(first)
+        cheat.EspLibrary.main_settings.simplecalc = first
         cheat.EspLibrary.icaca()
-    end)
-    espb:AddToggle('espsimplecalc', {
-        Text = 'simpler corner calc (fps)',
-        Default = false,
-        Callback = function(first)
-            cheat.EspLibrary.main_settings.simplecalc = first
-            cheat.EspLibrary.icaca()
-        end
-    })
-    espb:AddToggle('espswitch', {
-        Text = 'enable esp',
-        Default = false,
-        Callback = function(first)
-            es.enabled = first
-            cheat.EspLibrary.icaca()
-        end
-    })
-    espb:AddToggle('espteamswitch', {
-        Text = 'team/ai check',
-        Default = false,
-        Callback = function(first)
-            cheat.EspLibrary.main_settings.teamcheck = first
-            cheat.EspLibrary.icaca()
-        end
-    })
-    espb:AddToggle('espsleeperswitch', {
-        Text = 'sleeper check',
-        Default = false,
-        Callback = function(first)
-            cheat.EspLibrary.main_settings.sleepcheck = first
-            cheat.EspLibrary.icaca()
-        end
-    })
+    end
+})
+
+espb:AddToggle('espswitch', {
+    Text = 'enable esp',
+    Default = false,
+    Callback = function(first)
+        es.enabled = first
+        cheat.EspLibrary.icaca()
+    end
+})
+
+espb:AddToggle('espteamswitch', {
+    Text = 'team/ai check',
+    Default = false,
+    Callback = function(first)
+        cheat.EspLibrary.main_settings.teamcheck = first
+        cheat.EspLibrary.icaca()
+    end
+})
+
+espb:AddToggle('espsleeperswitch', {
+    Text = 'sleeper check',
+    Default = false,
+    Callback = function(first)
+        cheat.EspLibrary.main_settings.sleepcheck = first
+        cheat.EspLibrary.icaca()
+    end
+})
     ----------------------------------------------------------
     espb:AddToggle('espbox', {
         Text = 'box esp',
